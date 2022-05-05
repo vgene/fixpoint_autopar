@@ -1,0 +1,788 @@
+opt -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/CallGraph.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/libSvf.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/libCudd.so -stat=false -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/libSCAFUtilities.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/libMemoryAnalysisModules.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/AllocAA.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/TalkDown.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/CallGraph.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/PDGAnalysis.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/Architecture.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/BasicUtilities.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/Task.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/DataFlow.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/HotProfiler.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/LoopStructure.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/Invariants.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/InductionVariables.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/Loops.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/Scheduler.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/OutlinerPass.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/MetadataManager.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/LoopTransformer.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/noelle-install-release/lib/Noelle.so -globals-aa -cfl-steens-aa -tbaa -scev-aa -basic-loop-aa -scev-loop-aa -auto-restrict-aa -intrinsic-aa -global-malloc-aa -pure-fun-aa -semi-local-fun-aa -phi-maze-aa -no-capture-global-aa -no-capture-src-aa -type-aa -no-escape-fields-aa -acyclic-aa -disjoint-fields-aa -field-malloc-aa -loop-variant-allocation-aa -std-in-out-err-aa -array-of-structures-aa -kill-flow-aa -callsite-depth-combinator-aa -unique-access-paths-aa -llvm-aa-results -scalar-evolution -loops -domtree -postdomtree -noellescaf -noellesvf -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/scaf-install-release/lib/libLoopProf.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/scaf-install-release/lib/libLAMPLoad.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/scaf-install-release/lib/libPointsToProfiler.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/cpf-install-release/lib/libStrategy.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/scaf-install-release/lib/libSpeculationModules.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/cpf-install-release/lib/libSpeculation.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/cpf-install-release/lib/libGraphAlgorithms.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/cpf-install-release/lib/libRedux.so -load /u/NAS_SCRATCH/ziyangx/cpf-workspace-9-master/build/cpf-install-release/lib/libOrchestration.so benchmark.bc -enable-specpriv -enable-edgeprof -lamp-map-loop -enable-lamp -basic-loop-aa -scev-loop-aa -auto-restrict-aa -intrinsic-aa -global-malloc-aa -pure-fun-aa -semi-local-fun-aa -phi-maze-aa -no-capture-global-aa -no-capture-src-aa -type-aa -no-escape-fields-aa -acyclic-aa -disjoint-fields-aa -field-malloc-aa -loop-variant-allocation-aa -std-in-out-err-aa -array-of-structures-aa -unique-access-paths-aa -llvm-aa-results -basicaa -globals-aa -cfl-steens-aa -tbaa -scev-aa -kill-flow-aa -callsite-depth-combinator-aa -objc-arc-aa -scoped-noalias -veto -nander -pdgbuilder -remed-selector -disable-output -ignore-cost
+Focus on these loops (in this order):
+ - main :: for.cond (filename:grep.c, line:100, col:5)	Time 159 / 159 Coverage: 100.0%
+ - main :: while.cond.i (filename:grep.c, line:57, col:3)	Time 154 / 159 Coverage: 96.9%
+Profile has incomplete allocation coverage because   call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %11) #9, !dbg !281, !namer !283
+Profile has incomplete allocation coverage because   call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %12) #9, !dbg !281, !namer !282
+Profile has incomplete allocation coverage because   call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %5) #9, !dbg !292, !namer !294
+Profile has incomplete allocation coverage because   call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %6) #9, !dbg !292, !namer !293
+Profile has incomplete allocation coverage because   call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %5) #9, !dbg !152, !namer !154
+Profile has incomplete allocation coverage because   call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %6) #9, !dbg !155, !namer !157
+Profile has incomplete allocation coverage because   call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %11) #9, !dbg !232, !namer !233
+Profile has incomplete allocation coverage because   call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %12) #9, !dbg !237, !namer !238
+Profile has incomplete allocation coverage because   %call2.i = call i64 @getline(i8** nonnull %line.i, i64* nonnull %len.i, %struct._IO_FILE* nonnull %call.i) #7, !dbg !248, !namer !249
+SpecPrivProfiler loader: Structure good/good, Read 409 good lines, 0 bad lines
+#################################################
+ Classification
+
+
+***************** Classify: main :: for.cond *****************
+Alloca found to be local:   %line.i = alloca i8*, align 8, !namer !116
+Alloca found to be local:   %len.i = alloca i64, align 8, !namer !117
+Classification report: Valid for:   Loop main :: for.cond, 
+  Found 0 shared AUs:
+  Found 0 local AUs:
+  Found 0 reduction AUs:
+  Found 0 private AUs:
+  Found 2 kill private AUs:
+    o kill_priv[sh=7] STACK main entry line.i AT FCN main (main :: for.cond) #regression
+    o kill_priv[sh=0] STACK main entry len.i AT FCN main (main :: for.cond) #regression
+  Found 0 shareable private AUs:
+  Found 1 read-only (live-in) AUs:
+    o ro HEAP find_files if.then8 call19 AT LOOP find_files:while.cond WITHIN FCN find_files WITHIN LOOP find_files:while.cond WITHIN FCN find_files WITHIN FCN main WITHIN TOP (main :: for.cond) #regression
+***************** Classify: main :: while.cond.i *****************
+Classification report: Valid for:   Loop main :: while.cond.i, 
+  Found 0 shared AUs:
+  Found 0 local AUs:
+  Found 0 reduction AUs:
+  Found 0 private AUs:
+  Found 0 kill private AUs:
+  Found 0 shareable private AUs:
+  Found 1 read-only (live-in) AUs:
+    o ro STACK main entry line.i AT FCN main (main :: while.cond.i) #regression
+---------------------------------------------------- Round 1 ----------------------------------------------------
+Loop main :: for.cond is incompatible with loop main :: while.cond.i because of simultaneous activation.
+Compatible Map:
+End of Compatible Map
+
+
+=------------------------------------------------------------------------------=
+Compute weight for loop main :: for.cond...
+constructEdgesFromMemory with CAF ...
+LoopAA Stack, top to bottom:
+	o basic-loop-aa
+	o unique-access-paths-aa
+	o array-of-structures-aa
+	o std-in-out-err-aa
+	o loop-variant-allocation-aa
+	o field-malloc-aa
+	o disjoint-fields-aa
+	o AcyclicAA
+	o NoEscapeFieldsAA
+	o TypeAA
+	o no-capture-src-aa
+	o no-capture-global-aa
+	o phi-maze-aa
+	o semi-local-fun-aa
+	o pure-fun-aa
+	o global-malloc-aa
+	o intrinsic-aa
+	o auto-restrict-aa
+	o scev-loopaa
+	o llvm-aa-results
+	o callsite-depth-combinator-aa
+	o kill-flow-aa
+	o kill-flow-ctrl-spec-aa
+	o callsite-depth-combinator-ctrl-spec-aa
+	o NoLoopAA
+Total memory dependence queries to CAF: 225
+annotateMemDepsWithRemedies with SCAF ...
+LoopAA Stack, top to bottom:
+	o basic-loop-aa
+	o unique-access-paths-aa
+	o array-of-structures-aa
+	o std-in-out-err-aa
+	o loop-variant-allocation-aa
+	o field-malloc-aa
+	o disjoint-fields-aa
+	o AcyclicAA
+	o NoEscapeFieldsAA
+	o TypeAA
+	o no-capture-src-aa
+	o no-capture-global-aa
+	o phi-maze-aa
+	o semi-local-fun-aa
+	o pure-fun-aa
+	o global-malloc-aa
+	o intrinsic-aa
+	o auto-restrict-aa
+	o scev-loopaa
+	o llvm-aa-results
+	o callsite-depth-combinator-aa
+	o kill-flow-aa
+	o simple-aa
+	o edge-count-oracle-aa
+	o kill-flow-ctrl-spec-aa
+	o callsite-depth-combinator-ctrl-spec-aa
+	o spec-priv-prediction-oracle-aa
+	o spec-priv-ptr-residue-aa
+	o txio-aa
+	o comm-libs-aa
+	o spec-priv-local-aa
+	o spec-priv-read-only-aa
+	o smtx-aa
+	o spec-priv-points-to-oracle-aa
+	o NoLoopAA
+construct Edges From Control ...
+construct Edges From UseDefs ...
+PDG construction completed
+Run Orchestrator:: find best parallelization strategy for main :: for.cond...
+Start of findBestStrategy for loop main::for.cond (filename:grep.c, line:100, col:5)
+LoopAA Stack, top to bottom:
+	o basic-loop-aa
+	o unique-access-paths-aa
+	o array-of-structures-aa
+	o std-in-out-err-aa
+	o loop-variant-allocation-aa
+	o field-malloc-aa
+	o disjoint-fields-aa
+	o AcyclicAA
+	o NoEscapeFieldsAA
+	o TypeAA
+	o no-capture-src-aa
+	o no-capture-global-aa
+	o phi-maze-aa
+	o semi-local-fun-aa
+	o pure-fun-aa
+	o global-malloc-aa
+	o intrinsic-aa
+	o auto-restrict-aa
+	o scev-loopaa
+	o llvm-aa-results
+	o callsite-depth-combinator-aa
+	o kill-flow-aa
+	o simple-aa
+	o edge-count-oracle-aa
+	o kill-flow-ctrl-spec-aa
+	o callsite-depth-combinator-ctrl-spec-aa
+	o spec-priv-prediction-oracle-aa
+	o spec-priv-ptr-residue-aa
+	o txio-aa
+	o comm-libs-aa
+	o spec-priv-local-aa
+	o spec-priv-read-only-aa
+	o priv-aa
+	o spec-priv-locality-oracle-aa
+	o smtx-aa
+	o spec-priv-points-to-oracle-aa
+	o NoLoopAA
+
+Critic ps-dswp-critic
+Begin criticisms generation for PS-DSWP critic
+(Mem, WAR) edge(s) from   %call2.i = call i64 @getline(i8** nonnull %line.i, i64* nonnull %len.i, %struct._IO_FILE* nonnull %call.i) #7, !dbg !248, !namer !249 (filename:grep.c, line:57, col:18)
+    to   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Can be removed with: (mem-ver-remedy )
+(Mem, WAR) edge(s) from   %call2.i = call i64 @getline(i8** nonnull %line.i, i64* nonnull %len.i, %struct._IO_FILE* nonnull %call.i) #7, !dbg !248, !namer !249 (filename:grep.c, line:57, col:18)
+    to   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+Can be removed with: (mem-ver-remedy )
+(Mem, WAR) edge(s) from   %call4.i = call i32 (i8*, i8*, ...) bitcast (i32 (...)* @strstr to i32 (i8*, i8*, ...)*)(i8* %16, i8* %3) #7, !dbg !260, !namer !261 (filename:grep.c, line:59, col:9)
+    to   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Can be removed with: (mem-ver-remedy )
+(Mem, WAR) edge(s) from   %call4.i = call i32 (i8*, i8*, ...) bitcast (i32 (...)* @strstr to i32 (i8*, i8*, ...)*)(i8* %16, i8* %3) #7, !dbg !260, !namer !261 (filename:grep.c, line:59, col:9)
+    to   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+Can be removed with: (mem-ver-remedy )
+(Mem, RAW) edge(s) from   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+    to   %call10.i = call i32 @fclose(%struct._IO_FILE* nonnull %call.i) #7, !dbg !279, !namer !280 (filename:grep.c, line:66, col:3)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, RAW) edge(s) from   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+    to   %call.i = call %struct._IO_FILE* @fopen(i8* %13, i8* %14) #7, !dbg !217, !namer !218 (filename:grep.c, line:47, col:13)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, RAW) edge(s) from   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+    to   %call2.i = call i64 @getline(i8** nonnull %line.i, i64* nonnull %len.i, %struct._IO_FILE* nonnull %call.i) #7, !dbg !248, !namer !249 (filename:grep.c, line:57, col:18)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, RAW) edge(s) from   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+    to   %call4.i = call i32 (i8*, i8*, ...) bitcast (i32 (...)* @strstr to i32 (i8*, i8*, ...)*)(i8* %16, i8* %3) #7, !dbg !260, !namer !261 (filename:grep.c, line:59, col:9)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, RAW) edge(s) from   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+    to   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, WAR) edge(s) from   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+    to   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Can be removed with: (mem-ver-remedy )
+(Mem, WAW) edge(s) from   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+    to   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, RAW) edge(s) from   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+    to   %13 = load i8*, i8** %arrayidx5, align 8, !dbg !211, !tbaa !131, !namer !213 (filename:grep.c, line:101, col:12)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, WAR) edge(s) from   %13 = load i8*, i8** %arrayidx5, align 8, !dbg !211, !tbaa !131, !namer !213 (filename:grep.c, line:101, col:12)
+    to   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+Can be removed with: (mem-ver-remedy )
+(Mem, WAR) edge(s) from   %13 = load i8*, i8** %arrayidx5, align 8, !dbg !211, !tbaa !131, !namer !213 (filename:grep.c, line:101, col:12)
+    to   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Can be removed with: (mem-ver-remedy )
+(Mem, WAR) edge(s) from   %call.i = call %struct._IO_FILE* @fopen(i8* %13, i8* %14) #7, !dbg !217, !namer !218 (filename:grep.c, line:47, col:13)
+    to   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Can be removed with: (mem-ver-remedy )
+(Mem, WAR) edge(s) from   %call.i = call %struct._IO_FILE* @fopen(i8* %13, i8* %14) #7, !dbg !217, !namer !218 (filename:grep.c, line:47, col:13)
+    to   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+Can be removed with: (mem-ver-remedy )
+(Mem, RAW) edge(s) from   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+    to   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, WAR) edge(s) from   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+    to   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+Can be removed with: (mem-ver-remedy )
+(Mem, WAW) edge(s) from   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+    to   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, WAR) edge(s) from   %call10.i = call i32 @fclose(%struct._IO_FILE* nonnull %call.i) #7, !dbg !279, !namer !280 (filename:grep.c, line:66, col:3)
+    to   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Can be removed with: (mem-ver-remedy )
+(Mem, WAR) edge(s) from   %call10.i = call i32 @fclose(%struct._IO_FILE* nonnull %call.i) #7, !dbg !279, !namer !280 (filename:grep.c, line:66, col:3)
+    to   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+Can be removed with: (mem-ver-remedy )
+(Mem, RAW) edge(s) from   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+    to   %call.i = call %struct._IO_FILE* @fopen(i8* %13, i8* %14) #7, !dbg !217, !namer !218 (filename:grep.c, line:47, col:13)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, RAW) edge(s) from   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+    to   %call2.i = call i64 @getline(i8** nonnull %line.i, i64* nonnull %len.i, %struct._IO_FILE* nonnull %call.i) #7, !dbg !248, !namer !249 (filename:grep.c, line:57, col:18)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, RAW) edge(s) from   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+    to   %call4.i = call i32 (i8*, i8*, ...) bitcast (i32 (...)* @strstr to i32 (i8*, i8*, ...)*)(i8* %16, i8* %3) #7, !dbg !260, !namer !261 (filename:grep.c, line:59, col:9)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, RAW) edge(s) from   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+    to   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, RAW) edge(s) from   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+    to   %13 = load i8*, i8** %arrayidx5, align 8, !dbg !211, !tbaa !131, !namer !213 (filename:grep.c, line:101, col:12)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, WAR) edge(s) from   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+    to   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Can be removed with: (mem-ver-remedy )
+(Mem, WAW) edge(s) from   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+    to   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, RAW) edge(s) from   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+    to   %call10.i = call i32 @fclose(%struct._IO_FILE* nonnull %call.i) #7, !dbg !279, !namer !280 (filename:grep.c, line:66, col:3)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, RAW) edge(s) from   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+    to   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, WAR) edge(s) from   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+    to   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+Can be removed with: (mem-ver-remedy )
+(Mem, WAW) edge(s) from   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+    to   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   br label %while.cond.i, !dbg !244, !namer !245 (filename:grep.c, line:57, col:3)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   %call2.i = call i64 @getline(i8** nonnull %line.i, i64* nonnull %len.i, %struct._IO_FILE* nonnull %call.i) #7, !dbg !248, !namer !249 (filename:grep.c, line:57, col:18)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   %indvars.iv = phi i64 [ %indvars.iv.next, %grep.exit ], [ 0, %if.end ], !dbg !201, !namer !202 (filename:grep.c, line:0, col:0)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   %13 = load i8*, i8** %arrayidx5, align 8, !dbg !211, !tbaa !131, !namer !213 (filename:grep.c, line:101, col:12)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   %call.i = call %struct._IO_FILE* @fopen(i8* %13, i8* %14) #7, !dbg !217, !namer !218 (filename:grep.c, line:47, col:13)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   br i1 %cmp.i, label %if.then.i, label %if.end.i, !dbg !223, !prof !224, !namer !225 (filename:grep.c, line:48, col:7)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %11) #9, !dbg !232, !namer !233 (filename:grep.c, line:54, col:3)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   store i8* null, i8** %line.i, align 8, !dbg !235, !tbaa !131, !namer !236 (filename:grep.c, line:54, col:9)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %12) #9, !dbg !237, !namer !238 (filename:grep.c, line:55, col:3)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   store i64 0, i64* %len.i, align 8, !dbg !240, !tbaa !241, !namer !243 (filename:grep.c, line:55, col:10)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   br i1 %cmp3.i, label %while.end.i, label %while.body.i, !dbg !244, !prof !253, !namer !254 (filename:grep.c, line:57, col:3)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   %call4.i = call i32 (i8*, i8*, ...) bitcast (i32 (...)* @strstr to i32 (i8*, i8*, ...)*)(i8* %16, i8* %3) #7, !dbg !260, !namer !261 (filename:grep.c, line:59, col:9)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   br i1 %cmp5.i, label %if.end9.i, label %if.then7.i, !dbg !264, !prof !265, !namer !266 (filename:grep.c, line:59, col:9)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   br label %if.end9.i, !dbg !274, !namer !275 (filename:grep.c, line:62, col:5)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   br label %while.cond.i, !dbg !244, !llvm.loop !276, !namer !278 (filename:grep.c, line:57, col:3)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   %call10.i = call i32 @fclose(%struct._IO_FILE* nonnull %call.i) #7, !dbg !279, !namer !280 (filename:grep.c, line:66, col:3)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %12) #9, !dbg !281, !namer !282 (filename:grep.c, line:67, col:1)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %11) #9, !dbg !281, !namer !283 (filename:grep.c, line:67, col:1)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   br label %grep.exit, !dbg !281, !namer !284 (filename:grep.c, line:67, col:1)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   br label %grep.exit, !dbg !230, !namer !231 (filename:grep.c, line:50, col:5)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209 (filename:grep.c, line:100, col:5)
+    to   br label %for.cond, !dbg !288, !llvm.loop !289, !namer !291 (filename:grep.c, line:100, col:5)
+Can be removed with: (ctrl-spec-remedy )
+Cannot remove loop-carried (Reg, RAW) edge(s) from   %indvars.iv.next = add nuw nsw i64 %indvars.iv, 1, !dbg !285, !namer !286 (filename:grep.c, line:100, col:33)
+    to   %indvars.iv = phi i64 [ %indvars.iv.next, %grep.exit ], [ 0, %if.end ], !dbg !201, !namer !202 (filename:grep.c, line:0, col:0)
+
+RAW Memory Loop-Carried Deps Count: 14
+WAW Memory Loop-Carried Deps Count: 4
+WAR Memory Loop-Carried Deps Count: 14
+Register Loop-Carried Deps Count: 1
+Control Loop-Carried Deps Count: 24
+
+Coverage of loop-carried dependences for hot loop main :: for.cond covered=56, total=57 , percentage=98.25%
+
+Blocking edge:   %14 = getelementptr [2 x i8], [2 x i8]* @.str.3, i64 0, i64 0, !namer !216
+    to   %call.i = call %struct._IO_FILE* @fopen(i8* %13, i8* %14) #7, !dbg !217, !namer !218 (filename:grep.c, line:47, col:13)
+Blocking edge:   %arrayidx5 = getelementptr inbounds i8*, i8** %10, i64 %indvars.iv, !dbg !211, !namer !212 (filename:grep.c, line:101, col:12)
+    to   %13 = load i8*, i8** %arrayidx5, align 8, !dbg !211, !tbaa !131, !namer !213 (filename:grep.c, line:101, col:12)
+Node can be ignored for memory profiling  %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229 (filename:grep.c, line:49, col:5)
+Node can be ignored for memory profiling  call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %11) #9, !dbg !232, !namer !233 (filename:grep.c, line:54, col:3)
+Node can be ignored for memory profiling  call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %12) #9, !dbg !237, !namer !238 (filename:grep.c, line:55, col:3)
+Blocking edge:   store i8* null, i8** %line.i, align 8, !dbg !235, !tbaa !131, !namer !236 (filename:grep.c, line:54, col:9)
+    to   %call2.i = call i64 @getline(i8** nonnull %line.i, i64* nonnull %len.i, %struct._IO_FILE* nonnull %call.i) #7, !dbg !248, !namer !249 (filename:grep.c, line:57, col:18)
+Blocking edge:   store i64 0, i64* %len.i, align 8, !dbg !240, !tbaa !241, !namer !243 (filename:grep.c, line:55, col:10)
+    to   %call2.i = call i64 @getline(i8** nonnull %line.i, i64* nonnull %len.i, %struct._IO_FILE* nonnull %call.i) #7, !dbg !248, !namer !249 (filename:grep.c, line:57, col:18)
+Blocking edge:   %call.i = call %struct._IO_FILE* @fopen(i8* %13, i8* %14) #7, !dbg !217, !namer !218 (filename:grep.c, line:47, col:13)
+    to   %call2.i = call i64 @getline(i8** nonnull %line.i, i64* nonnull %len.i, %struct._IO_FILE* nonnull %call.i) #7, !dbg !248, !namer !249 (filename:grep.c, line:57, col:18)
+Blocking edge:   store i8* null, i8** %line.i, align 8, !dbg !235, !tbaa !131, !namer !236 (filename:grep.c, line:54, col:9)
+    to   %16 = load i8*, i8** %line.i, align 8, !dbg !255, !tbaa !131, !namer !258 (filename:grep.c, line:59, col:16)
+Blocking edge:   store i8* null, i8** %line.i, align 8, !dbg !235, !tbaa !131, !namer !236 (filename:grep.c, line:54, col:9)
+    to   %call4.i = call i32 (i8*, i8*, ...) bitcast (i32 (...)* @strstr to i32 (i8*, i8*, ...)*)(i8* %16, i8* %3) #7, !dbg !260, !namer !261 (filename:grep.c, line:59, col:9)
+Node can be ignored for memory profiling  %17 = load i8*, i8** %line.i, align 8, !dbg !267, !tbaa !131, !namer !269 (filename:grep.c, line:61, col:35)
+Node can be ignored for memory profiling  %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Blocking edge:   %call.i = call %struct._IO_FILE* @fopen(i8* %13, i8* %14) #7, !dbg !217, !namer !218 (filename:grep.c, line:47, col:13)
+    to   %call10.i = call i32 @fclose(%struct._IO_FILE* nonnull %call.i) #7, !dbg !279, !namer !280 (filename:grep.c, line:66, col:3)
+Node can be ignored for memory profiling  call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %12) #9, !dbg !281, !namer !282 (filename:grep.c, line:67, col:1)
+Node can be ignored for memory profiling  call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %11) #9, !dbg !281, !namer !283 (filename:grep.c, line:67, col:1)
+Elided Node: 7/15
+
+PS-DSWP applicable to main::for.cond: large parallel stage found
+Pipeline for loop main :: for.cond
+ Stage 0
+  Replicated Prefix
+    /////    %indvars.iv = phi i64 [ %indvars.iv.next, %grep.exit ], [ 0, %if.end ], !dbg !201, !namer !202
+    XXXXX    %indvars.iv.next = add nuw nsw i64 %indvars.iv, 1, !dbg !285, !namer !286
+  Parallel Stage, 22 workers
+    XXXXX    call void @llvm.dbg.value(metadata i64 %indvars.iv, metadata !223, metadata !DIExpression()), !dbg !292, !namer !369
+    XXXXX    call void @llvm.dbg.value(metadata i32 %8, metadata !286, metadata !DIExpression()), !dbg !292, !namer !370
+    XXXXX    %cmp4 = icmp slt i64 %indvars.iv, %9, !dbg !205, !namer !206
+    /////    br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209
+    XXXXX    call void @llvm.dbg.value(metadata i8** %10, metadata !285, metadata !DIExpression()), !dbg !292, !namer !376
+    XXXXX    %arrayidx5 = getelementptr inbounds i8*, i8** %10, i64 %indvars.iv, !dbg !211, !namer !212
+    #####    %13 = load i8*, i8** %arrayidx5, align 8, !dbg !211, !tbaa !131, !namer !213
+    XXXXX    call void @llvm.dbg.value(metadata i8* %13, metadata !353, metadata !DIExpression()) #9, !dbg !348, !namer !380
+    XXXXX    call void @llvm.dbg.value(metadata i8* %3, metadata !354, metadata !DIExpression()) #9, !dbg !348, !namer !381
+    XXXXX    %14 = getelementptr [2 x i8], [2 x i8]* @.str.3, i64 0, i64 0, !namer !216
+    #####    %call.i = call %struct._IO_FILE* @fopen(i8* %13, i8* %14) #7, !dbg !217, !namer !218
+    XXXXX    call void @llvm.dbg.value(metadata %struct._IO_FILE* %call.i, metadata !355, metadata !DIExpression()) #9, !dbg !348, !namer !385
+    XXXXX    %cmp.i = icmp eq %struct._IO_FILE* %call.i, null, !dbg !220, !namer !222
+    /////    br i1 %cmp.i, label %if.then.i, label %if.end.i, !dbg !223, !prof !224, !namer !225
+    XXXXX    %15 = getelementptr [23 x i8], [23 x i8]* @.str.4, i64 0, i64 0, !namer !226
+    #####    %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229
+    /////    br label %grep.exit, !dbg !230, !namer !231
+    #####    call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %11) #9, !dbg !232, !namer !233
+    XXXXX    call void @llvm.dbg.value(metadata i8* null, metadata !356, metadata !DIExpression()) #9, !dbg !348, !namer !400
+    #####    store i8* null, i8** %line.i, align 8, !dbg !235, !tbaa !131, !namer !236
+    #####    call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %12) #9, !dbg !237, !namer !238
+    XXXXX    call void @llvm.dbg.value(metadata i64 0, metadata !357, metadata !DIExpression()) #9, !dbg !348, !namer !405
+    #####    store i64 0, i64* %len.i, align 8, !dbg !240, !tbaa !241, !namer !243
+    /////    br label %while.cond.i, !dbg !244, !namer !245
+    XXXXX    call void @llvm.dbg.value(metadata i8** %line.i, metadata !356, metadata !DIExpression(DW_OP_deref)) #9, !dbg !348, !namer !411
+    XXXXX    call void @llvm.dbg.value(metadata i64* %len.i, metadata !357, metadata !DIExpression(DW_OP_deref)) #9, !dbg !348, !namer !412
+    #####    %call2.i = call i64 @getline(i8** nonnull %line.i, i64* nonnull %len.i, %struct._IO_FILE* nonnull %call.i) #7, !dbg !248, !namer !249
+    XXXXX    call void @llvm.dbg.value(metadata i64 %call2.i, metadata !358, metadata !DIExpression()) #9, !dbg !348, !namer !415
+    XXXXX    %cmp3.i = icmp eq i64 %call2.i, -1, !dbg !251, !namer !252
+    /////    br i1 %cmp3.i, label %while.end.i, label %while.body.i, !dbg !244, !prof !253, !namer !254
+    #####    %16 = load i8*, i8** %line.i, align 8, !dbg !255, !tbaa !131, !namer !258
+    XXXXX    call void @llvm.dbg.value(metadata i8* %16, metadata !356, metadata !DIExpression()) #9, !dbg !348, !namer !424
+    #####    %call4.i = call i32 (i8*, i8*, ...) bitcast (i32 (...)* @strstr to i32 (i8*, i8*, ...)*)(i8* %16, i8* %3) #7, !dbg !260, !namer !261
+    XXXXX    %cmp5.i = icmp eq i32 %call4.i, 0, !dbg !262, !namer !263
+    /////    br i1 %cmp5.i, label %if.end9.i, label %if.then7.i, !dbg !264, !prof !265, !namer !266
+    #####    %17 = load i8*, i8** %line.i, align 8, !dbg !267, !tbaa !131, !namer !269
+    XXXXX    call void @llvm.dbg.value(metadata i8* %17, metadata !356, metadata !DIExpression()) #9, !dbg !348, !namer !435
+    XXXXX    %18 = getelementptr [7 x i8], [7 x i8]* @.str.5, i64 0, i64 0, !namer !271
+    #####    %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273
+    /////    br label %if.end9.i, !dbg !274, !namer !275
+    /////    br label %while.cond.i, !dbg !244, !llvm.loop !276, !namer !278
+    #####    %call10.i = call i32 @fclose(%struct._IO_FILE* nonnull %call.i) #7, !dbg !279, !namer !280
+    #####    call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %12) #9, !dbg !281, !namer !282
+    #####    call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %11) #9, !dbg !281, !namer !283
+    /////    br label %grep.exit, !dbg !281, !namer !284
+    XXXXX    call void @llvm.dbg.value(metadata i32 undef, metadata !223, metadata !DIExpression(DW_OP_plus_uconst, 1, DW_OP_stack_value)), !dbg !292, !namer !452
+    /////    br label %for.cond, !dbg !288, !llvm.loop !289, !namer !291
+
+	*** estimate pipeline weights
+		- Stage  0 Weight 100.00 P-Factor   18 Speedup  16.26 Absolute P-Weight   9.78
+		- Weight   9.78
+Addressible criticisms
+
+-====================================================-
+Selected Remedies:
+-====================================================-
+
+Selected Remediators:
+
+ctrl-spec-remedy was selected 42 times
+mem-ver-remedy was selected 14 times
+
+-====================================================-
+
+Expected Savings from critic ps-dswp-critic (no remedies): 149223  and selected remedies cost: 0
+
+Critic dswp-critic
+	*** estimate pipeline weights
+		- Stage  0 Weight   5.33 P-Factor    1 Speedup   1.00 Absolute P-Weight   8.47
+		- Stage  1 Weight  72.96 P-Factor    1 Speedup   1.00 Absolute P-Weight 116.00
+		- Stage  2 Weight  20.60 P-Factor    1 Speedup   1.00 Absolute P-Weight  32.75
+		- Stage  3 Weight   1.11 P-Factor    1 Speedup   1.00 Absolute P-Weight   1.77
+		- Weight 116.00
+
+No criticisms generated!
+
+Expected Savings from critic dswp-critic (no remedies): 43000  and selected remedies cost: 0
+Largest Seq SCC (%): 0.000000
+Parallel SCC (%): 100.000000
+Sequential SCC (%): 0.000000
+Paralleism (%): 100.000000
+	*** estimate pipeline weights
+		- Stage  0 Weight 100.00 P-Factor   18 Speedup  16.26 Absolute P-Weight   9.78
+		- Weight   9.78
+Pipeline for loop main :: for.cond
+ Stage 0
+  Replicated Prefix
+    /////    %indvars.iv = phi i64 [ %indvars.iv.next, %grep.exit ], [ 0, %if.end ], !dbg !201, !namer !202
+    XXXXX    %indvars.iv.next = add nuw nsw i64 %indvars.iv, 1, !dbg !285, !namer !286
+  Parallel Stage, 22 workers
+    XXXXX    call void @llvm.dbg.value(metadata i64 %indvars.iv, metadata !223, metadata !DIExpression()), !dbg !292, !namer !369
+    XXXXX    call void @llvm.dbg.value(metadata i32 %8, metadata !286, metadata !DIExpression()), !dbg !292, !namer !370
+    XXXXX    %cmp4 = icmp slt i64 %indvars.iv, %9, !dbg !205, !namer !206
+    /////    br i1 %cmp4, label %for.body, label %for.end, !dbg !207, !prof !208, !namer !209
+    XXXXX    call void @llvm.dbg.value(metadata i8** %10, metadata !285, metadata !DIExpression()), !dbg !292, !namer !376
+    XXXXX    %arrayidx5 = getelementptr inbounds i8*, i8** %10, i64 %indvars.iv, !dbg !211, !namer !212
+    #####    %13 = load i8*, i8** %arrayidx5, align 8, !dbg !211, !tbaa !131, !namer !213
+    XXXXX    call void @llvm.dbg.value(metadata i8* %13, metadata !353, metadata !DIExpression()) #9, !dbg !348, !namer !380
+    XXXXX    call void @llvm.dbg.value(metadata i8* %3, metadata !354, metadata !DIExpression()) #9, !dbg !348, !namer !381
+    XXXXX    %14 = getelementptr [2 x i8], [2 x i8]* @.str.3, i64 0, i64 0, !namer !216
+    #####    %call.i = call %struct._IO_FILE* @fopen(i8* %13, i8* %14) #7, !dbg !217, !namer !218
+    XXXXX    call void @llvm.dbg.value(metadata %struct._IO_FILE* %call.i, metadata !355, metadata !DIExpression()) #9, !dbg !348, !namer !385
+    XXXXX    %cmp.i = icmp eq %struct._IO_FILE* %call.i, null, !dbg !220, !namer !222
+    /////    br i1 %cmp.i, label %if.then.i, label %if.end.i, !dbg !223, !prof !224, !namer !225
+    XXXXX    %15 = getelementptr [23 x i8], [23 x i8]* @.str.4, i64 0, i64 0, !namer !226
+    #####    %call1.i = call i32 (i8*, ...) @printf(i8* %15, i8* %13) #7, !dbg !227, !namer !229
+    /////    br label %grep.exit, !dbg !230, !namer !231
+    #####    call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %11) #9, !dbg !232, !namer !233
+    XXXXX    call void @llvm.dbg.value(metadata i8* null, metadata !356, metadata !DIExpression()) #9, !dbg !348, !namer !400
+    #####    store i8* null, i8** %line.i, align 8, !dbg !235, !tbaa !131, !namer !236
+    #####    call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %12) #9, !dbg !237, !namer !238
+    XXXXX    call void @llvm.dbg.value(metadata i64 0, metadata !357, metadata !DIExpression()) #9, !dbg !348, !namer !405
+    #####    store i64 0, i64* %len.i, align 8, !dbg !240, !tbaa !241, !namer !243
+    /////    br label %while.cond.i, !dbg !244, !namer !245
+    XXXXX    call void @llvm.dbg.value(metadata i8** %line.i, metadata !356, metadata !DIExpression(DW_OP_deref)) #9, !dbg !348, !namer !411
+    XXXXX    call void @llvm.dbg.value(metadata i64* %len.i, metadata !357, metadata !DIExpression(DW_OP_deref)) #9, !dbg !348, !namer !412
+    #####    %call2.i = call i64 @getline(i8** nonnull %line.i, i64* nonnull %len.i, %struct._IO_FILE* nonnull %call.i) #7, !dbg !248, !namer !249
+    XXXXX    call void @llvm.dbg.value(metadata i64 %call2.i, metadata !358, metadata !DIExpression()) #9, !dbg !348, !namer !415
+    XXXXX    %cmp3.i = icmp eq i64 %call2.i, -1, !dbg !251, !namer !252
+    /////    br i1 %cmp3.i, label %while.end.i, label %while.body.i, !dbg !244, !prof !253, !namer !254
+    #####    %16 = load i8*, i8** %line.i, align 8, !dbg !255, !tbaa !131, !namer !258
+    XXXXX    call void @llvm.dbg.value(metadata i8* %16, metadata !356, metadata !DIExpression()) #9, !dbg !348, !namer !424
+    #####    %call4.i = call i32 (i8*, i8*, ...) bitcast (i32 (...)* @strstr to i32 (i8*, i8*, ...)*)(i8* %16, i8* %3) #7, !dbg !260, !namer !261
+    XXXXX    %cmp5.i = icmp eq i32 %call4.i, 0, !dbg !262, !namer !263
+    /////    br i1 %cmp5.i, label %if.end9.i, label %if.then7.i, !dbg !264, !prof !265, !namer !266
+    #####    %17 = load i8*, i8** %line.i, align 8, !dbg !267, !tbaa !131, !namer !269
+    XXXXX    call void @llvm.dbg.value(metadata i8* %17, metadata !356, metadata !DIExpression()) #9, !dbg !348, !namer !435
+    XXXXX    %18 = getelementptr [7 x i8], [7 x i8]* @.str.5, i64 0, i64 0, !namer !271
+    #####    %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273
+    /////    br label %if.end9.i, !dbg !274, !namer !275
+    /////    br label %while.cond.i, !dbg !244, !llvm.loop !276, !namer !278
+    #####    %call10.i = call i32 @fclose(%struct._IO_FILE* nonnull %call.i) #7, !dbg !279, !namer !280
+    #####    call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %12) #9, !dbg !281, !namer !282
+    #####    call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %11) #9, !dbg !281, !namer !283
+    /////    br label %grep.exit, !dbg !281, !namer !284
+    XXXXX    call void @llvm.dbg.value(metadata i32 undef, metadata !223, metadata !DIExpression(DW_OP_plus_uconst, 1, DW_OP_stack_value)), !dbg !292, !namer !452
+    /////    br label %for.cond, !dbg !288, !llvm.loop !289, !namer !291
+
+Parallelizable Loop main :: for.cond has expected savings 149223
+
+
+=------------------------------------------------------------------------------=
+Compute weight for loop main :: while.cond.i...
+constructEdgesFromMemory with CAF ...
+LoopAA Stack, top to bottom:
+	o basic-loop-aa
+	o unique-access-paths-aa
+	o array-of-structures-aa
+	o std-in-out-err-aa
+	o loop-variant-allocation-aa
+	o field-malloc-aa
+	o disjoint-fields-aa
+	o AcyclicAA
+	o NoEscapeFieldsAA
+	o TypeAA
+	o no-capture-src-aa
+	o no-capture-global-aa
+	o phi-maze-aa
+	o semi-local-fun-aa
+	o pure-fun-aa
+	o global-malloc-aa
+	o intrinsic-aa
+	o auto-restrict-aa
+	o scev-loopaa
+	o llvm-aa-results
+	o callsite-depth-combinator-aa
+	o kill-flow-aa
+	o kill-flow-ctrl-spec-aa
+	o callsite-depth-combinator-ctrl-spec-aa
+	o NoLoopAA
+Total memory dependence queries to CAF: 25
+annotateMemDepsWithRemedies with SCAF ...
+LoopAA Stack, top to bottom:
+	o basic-loop-aa
+	o unique-access-paths-aa
+	o array-of-structures-aa
+	o std-in-out-err-aa
+	o loop-variant-allocation-aa
+	o field-malloc-aa
+	o disjoint-fields-aa
+	o AcyclicAA
+	o NoEscapeFieldsAA
+	o TypeAA
+	o no-capture-src-aa
+	o no-capture-global-aa
+	o phi-maze-aa
+	o semi-local-fun-aa
+	o pure-fun-aa
+	o global-malloc-aa
+	o intrinsic-aa
+	o auto-restrict-aa
+	o scev-loopaa
+	o llvm-aa-results
+	o callsite-depth-combinator-aa
+	o kill-flow-aa
+	o simple-aa
+	o edge-count-oracle-aa
+	o kill-flow-ctrl-spec-aa
+	o callsite-depth-combinator-ctrl-spec-aa
+	o spec-priv-prediction-oracle-aa
+	o spec-priv-ptr-residue-aa
+	o txio-aa
+	o comm-libs-aa
+	o spec-priv-local-aa
+	o spec-priv-read-only-aa
+	o smtx-aa
+	o spec-priv-points-to-oracle-aa
+	o NoLoopAA
+construct Edges From Control ...
+construct Edges From UseDefs ...
+PDG construction completed
+Run Orchestrator:: find best parallelization strategy for main :: while.cond.i...
+Start of findBestStrategy for loop main::while.cond.i (filename:grep.c, line:57, col:3)
+LoopAA Stack, top to bottom:
+	o basic-loop-aa
+	o unique-access-paths-aa
+	o array-of-structures-aa
+	o std-in-out-err-aa
+	o loop-variant-allocation-aa
+	o field-malloc-aa
+	o disjoint-fields-aa
+	o AcyclicAA
+	o NoEscapeFieldsAA
+	o TypeAA
+	o no-capture-src-aa
+	o no-capture-global-aa
+	o phi-maze-aa
+	o semi-local-fun-aa
+	o pure-fun-aa
+	o global-malloc-aa
+	o intrinsic-aa
+	o auto-restrict-aa
+	o scev-loopaa
+	o llvm-aa-results
+	o callsite-depth-combinator-aa
+	o kill-flow-aa
+	o simple-aa
+	o edge-count-oracle-aa
+	o kill-flow-ctrl-spec-aa
+	o callsite-depth-combinator-ctrl-spec-aa
+	o spec-priv-prediction-oracle-aa
+	o spec-priv-ptr-residue-aa
+	o txio-aa
+	o comm-libs-aa
+	o spec-priv-local-aa
+	o spec-priv-read-only-aa
+	o priv-aa
+	o spec-priv-locality-oracle-aa
+	o smtx-aa
+	o spec-priv-points-to-oracle-aa
+	o NoLoopAA
+
+Critic ps-dswp-critic
+Begin criticisms generation for PS-DSWP critic
+(Mem, RAW) edge(s) from   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+    to   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp3.i, label %while.end.i, label %while.body.i, !dbg !244, !prof !253, !namer !254 (filename:grep.c, line:57, col:3)
+    to   br label %if.end9.i, !dbg !274, !namer !275 (filename:grep.c, line:62, col:5)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, WAR) edge(s) from   %17 = load i8*, i8** %line.i, align 8, !dbg !267, !tbaa !131, !namer !269 (filename:grep.c, line:61, col:35)
+    to   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Can be removed with: (mem-ver-remedy )
+(Mem, WAW) edge(s) from   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+    to   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp3.i, label %while.end.i, label %while.body.i, !dbg !244, !prof !253, !namer !254 (filename:grep.c, line:57, col:3)
+    to   br label %while.cond.i, !dbg !244, !llvm.loop !276, !namer !278 (filename:grep.c, line:57, col:3)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, WAR) edge(s) from   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+    to   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Can be removed with: (mem-ver-remedy )
+(Mem, WAR) edge(s) from   %call2.i = call i64 @getline(i8** nonnull %line.i, i64* nonnull %len.i, %struct._IO_FILE* nonnull %call.i) #7, !dbg !248, !namer !249 (filename:grep.c, line:57, col:18)
+    to   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Can be removed with: (mem-ver-remedy )
+(Mem, WAR) edge(s) from   %16 = load i8*, i8** %line.i, align 8, !dbg !255, !tbaa !131, !namer !258 (filename:grep.c, line:59, col:16)
+    to   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Can be removed with: (mem-ver-remedy )
+(Mem, RAW) edge(s) from   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+    to   %17 = load i8*, i8** %line.i, align 8, !dbg !267, !tbaa !131, !namer !269 (filename:grep.c, line:61, col:35)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, RAW) edge(s) from   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+    to   %call4.i = call i32 (i8*, i8*, ...) bitcast (i32 (...)* @strstr to i32 (i8*, i8*, ...)*)(i8* %16, i8* %3) #7, !dbg !260, !namer !261 (filename:grep.c, line:59, col:9)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp3.i, label %while.end.i, label %while.body.i, !dbg !244, !prof !253, !namer !254 (filename:grep.c, line:57, col:3)
+    to   %call4.i = call i32 (i8*, i8*, ...) bitcast (i32 (...)* @strstr to i32 (i8*, i8*, ...)*)(i8* %16, i8* %3) #7, !dbg !260, !namer !261 (filename:grep.c, line:59, col:9)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp3.i, label %while.end.i, label %while.body.i, !dbg !244, !prof !253, !namer !254 (filename:grep.c, line:57, col:3)
+    to   br i1 %cmp3.i, label %while.end.i, label %while.body.i, !dbg !244, !prof !253, !namer !254 (filename:grep.c, line:57, col:3)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, RAW) edge(s) from   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+    to   %16 = load i8*, i8** %line.i, align 8, !dbg !255, !tbaa !131, !namer !258 (filename:grep.c, line:59, col:16)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, RAW) edge(s) from   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+    to   %call2.i = call i64 @getline(i8** nonnull %line.i, i64* nonnull %len.i, %struct._IO_FILE* nonnull %call.i) #7, !dbg !248, !namer !249 (filename:grep.c, line:57, col:18)
+Can be removed with: (ctrl-spec-remedy )
+(Mem, WAR) edge(s) from   %call4.i = call i32 (i8*, i8*, ...) bitcast (i32 (...)* @strstr to i32 (i8*, i8*, ...)*)(i8* %16, i8* %3) #7, !dbg !260, !namer !261 (filename:grep.c, line:59, col:9)
+    to   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Can be removed with: (mem-ver-remedy )
+(Control) edge(s) from   br i1 %cmp3.i, label %while.end.i, label %while.body.i, !dbg !244, !prof !253, !namer !254 (filename:grep.c, line:57, col:3)
+    to   %call2.i = call i64 @getline(i8** nonnull %line.i, i64* nonnull %len.i, %struct._IO_FILE* nonnull %call.i) #7, !dbg !248, !namer !249 (filename:grep.c, line:57, col:18)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp3.i, label %while.end.i, label %while.body.i, !dbg !244, !prof !253, !namer !254 (filename:grep.c, line:57, col:3)
+    to   br i1 %cmp5.i, label %if.end9.i, label %if.then7.i, !dbg !264, !prof !265, !namer !266 (filename:grep.c, line:59, col:9)
+Can be removed with: (ctrl-spec-remedy )
+(Control) edge(s) from   br i1 %cmp3.i, label %while.end.i, label %while.body.i, !dbg !244, !prof !253, !namer !254 (filename:grep.c, line:57, col:3)
+    to   %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Can be removed with: (ctrl-spec-remedy )
+
+RAW Memory Loop-Carried Deps Count: 5
+WAW Memory Loop-Carried Deps Count: 1
+WAR Memory Loop-Carried Deps Count: 5
+Register Loop-Carried Deps Count: 0
+Control Loop-Carried Deps Count: 7
+
+Coverage of loop-carried dependences for hot loop main :: while.cond.i covered=18, total=18 , percentage=100.00%
+
+Blocking edge:   %call2.i = call i64 @getline(i8** nonnull %line.i, i64* nonnull %len.i, %struct._IO_FILE* nonnull %call.i) #7, !dbg !248, !namer !249 (filename:grep.c, line:57, col:18)
+    to   %cmp3.i = icmp eq i64 %call2.i, -1, !dbg !251, !namer !252 (filename:grep.c, line:57, col:43)
+Blocking edge:   %16 = load i8*, i8** %line.i, align 8, !dbg !255, !tbaa !131, !namer !258 (filename:grep.c, line:59, col:16)
+    to   %call4.i = call i32 (i8*, i8*, ...) bitcast (i32 (...)* @strstr to i32 (i8*, i8*, ...)*)(i8* %16, i8* %3) #7, !dbg !260, !namer !261 (filename:grep.c, line:59, col:9)
+Node can be ignored for memory profiling  %16 = load i8*, i8** %line.i, align 8, !dbg !255, !tbaa !131, !namer !258 (filename:grep.c, line:59, col:16)
+Node can be ignored for memory profiling  %17 = load i8*, i8** %line.i, align 8, !dbg !267, !tbaa !131, !namer !269 (filename:grep.c, line:61, col:35)
+Node can be ignored for memory profiling  %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273 (filename:grep.c, line:61, col:7)
+Elided Node: 3/5
+
+PS-DSWP applicable to main::while.cond.i: large parallel stage found
+Pipeline for loop main :: while.cond.i
+ Stage 0
+  Parallel Stage, 22 workers
+    XXXXX    call void @llvm.dbg.value(metadata i8** %line.i, metadata !356, metadata !DIExpression(DW_OP_deref)) #9, !dbg !348, !namer !411
+    XXXXX    call void @llvm.dbg.value(metadata i64* %len.i, metadata !357, metadata !DIExpression(DW_OP_deref)) #9, !dbg !348, !namer !412
+    #####    %call2.i = call i64 @getline(i8** nonnull %line.i, i64* nonnull %len.i, %struct._IO_FILE* nonnull %call.i) #7, !dbg !248, !namer !249
+    XXXXX    call void @llvm.dbg.value(metadata i64 %call2.i, metadata !358, metadata !DIExpression()) #9, !dbg !348, !namer !415
+    XXXXX    %cmp3.i = icmp eq i64 %call2.i, -1, !dbg !251, !namer !252
+    /////    br i1 %cmp3.i, label %while.end.i, label %while.body.i, !dbg !244, !prof !253, !namer !254
+    #####    %16 = load i8*, i8** %line.i, align 8, !dbg !255, !tbaa !131, !namer !258
+    XXXXX    call void @llvm.dbg.value(metadata i8* %16, metadata !356, metadata !DIExpression()) #9, !dbg !348, !namer !424
+    #####    %call4.i = call i32 (i8*, i8*, ...) bitcast (i32 (...)* @strstr to i32 (i8*, i8*, ...)*)(i8* %16, i8* %3) #7, !dbg !260, !namer !261
+    XXXXX    %cmp5.i = icmp eq i32 %call4.i, 0, !dbg !262, !namer !263
+    /////    br i1 %cmp5.i, label %if.end9.i, label %if.then7.i, !dbg !264, !prof !265, !namer !266
+    #####    %17 = load i8*, i8** %line.i, align 8, !dbg !267, !tbaa !131, !namer !269
+    XXXXX    call void @llvm.dbg.value(metadata i8* %17, metadata !356, metadata !DIExpression()) #9, !dbg !348, !namer !435
+    XXXXX    %18 = getelementptr [7 x i8], [7 x i8]* @.str.5, i64 0, i64 0, !namer !271
+    #####    %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273
+    /////    br label %if.end9.i, !dbg !274, !namer !275
+    /////    br label %while.cond.i, !dbg !244, !llvm.loop !276, !namer !278
+
+	*** estimate pipeline weights
+		- Stage  0 Weight 100.00 P-Factor   15 Speedup  13.75 Absolute P-Weight  11.20
+		- Weight  11.20
+Addressible criticisms
+
+-====================================================-
+Selected Remedies:
+-====================================================-
+
+Selected Remediators:
+
+ctrl-spec-remedy was selected 55 times
+mem-ver-remedy was selected 19 times
+
+-====================================================-
+
+Expected Savings from critic ps-dswp-critic (no remedies): 132801  and selected remedies cost: 0
+
+Critic dswp-critic
+	*** estimate pipeline weights
+		- Stage  0 Weight  75.32 P-Factor    1 Speedup   1.00 Absolute P-Weight 116.00
+		- Stage  1 Weight  22.39 P-Factor    1 Speedup   1.00 Absolute P-Weight  34.47
+		- Stage  2 Weight   2.29 P-Factor    1 Speedup   1.00 Absolute P-Weight   3.53
+		- Weight 116.00
+
+No criticisms generated!
+
+Expected Savings from critic dswp-critic (no remedies): 28000  and selected remedies cost: 0
+Largest Seq SCC (%): 0.000000
+Parallel SCC (%): 100.000000
+Sequential SCC (%): 0.000000
+Paralleism (%): 100.000000
+	*** estimate pipeline weights
+		- Stage  0 Weight 100.00 P-Factor   15 Speedup  13.75 Absolute P-Weight  11.20
+		- Weight  11.20
+Pipeline for loop main :: while.cond.i
+ Stage 0
+  Parallel Stage, 22 workers
+    XXXXX    call void @llvm.dbg.value(metadata i8** %line.i, metadata !356, metadata !DIExpression(DW_OP_deref)) #9, !dbg !348, !namer !411
+    XXXXX    call void @llvm.dbg.value(metadata i64* %len.i, metadata !357, metadata !DIExpression(DW_OP_deref)) #9, !dbg !348, !namer !412
+    #####    %call2.i = call i64 @getline(i8** nonnull %line.i, i64* nonnull %len.i, %struct._IO_FILE* nonnull %call.i) #7, !dbg !248, !namer !249
+    XXXXX    call void @llvm.dbg.value(metadata i64 %call2.i, metadata !358, metadata !DIExpression()) #9, !dbg !348, !namer !415
+    XXXXX    %cmp3.i = icmp eq i64 %call2.i, -1, !dbg !251, !namer !252
+    /////    br i1 %cmp3.i, label %while.end.i, label %while.body.i, !dbg !244, !prof !253, !namer !254
+    #####    %16 = load i8*, i8** %line.i, align 8, !dbg !255, !tbaa !131, !namer !258
+    XXXXX    call void @llvm.dbg.value(metadata i8* %16, metadata !356, metadata !DIExpression()) #9, !dbg !348, !namer !424
+    #####    %call4.i = call i32 (i8*, i8*, ...) bitcast (i32 (...)* @strstr to i32 (i8*, i8*, ...)*)(i8* %16, i8* %3) #7, !dbg !260, !namer !261
+    XXXXX    %cmp5.i = icmp eq i32 %call4.i, 0, !dbg !262, !namer !263
+    /////    br i1 %cmp5.i, label %if.end9.i, label %if.then7.i, !dbg !264, !prof !265, !namer !266
+    #####    %17 = load i8*, i8** %line.i, align 8, !dbg !267, !tbaa !131, !namer !269
+    XXXXX    call void @llvm.dbg.value(metadata i8* %17, metadata !356, metadata !DIExpression()) #9, !dbg !348, !namer !435
+    XXXXX    %18 = getelementptr [7 x i8], [7 x i8]* @.str.5, i64 0, i64 0, !namer !271
+    #####    %call8.i = call i32 (i8*, ...) @printf(i8* %18, i8* %13, i8* %17) #7, !dbg !272, !namer !273
+    /////    br label %if.end9.i, !dbg !274, !namer !275
+    /////    br label %while.cond.i, !dbg !244, !llvm.loop !276, !namer !278
+
+Parallelizable Loop main :: while.cond.i has expected savings 132801
+
+
+*********************************************************************
+Parallelizable loops:
+  - 100.00% main :: for.cond DSWP[P22'] (Loop speedup: 16.26x)
+  - 96.86% main :: while.cond.i DSWP[P22] (Loop speedup: 7.26x)
+  Total expected speedup: 16.26x using 22 workers.
+Count of remeds with unknown gravity stage: 0
+ - 100.00% depth 1    main :: for.cond    DSWP[P22']	P-portion=100.00% LgstSeq-portion=  0.00% LgstSeq-with-val-portion=  0.00%			#regrn-par-loop
+Count of remeds with unknown gravity stage: 0
+ X 96.86% depth 2    main :: while.cond.i    DSWP[P22]	P-portion=100.00% LgstSeq-portion=  0.00% LgstSeq-with-val-portion=  0.00%			#regrn-no-par-loop
