@@ -1,3 +1,7 @@
+*.dump
+compile_commands.json
+.clangd/
+build/
 blackscholes/inputs/
 regression_environ.rc
 ### macOS ###
