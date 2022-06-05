@@ -1,0 +1,92 @@
+## Functions Used in Grep for AWS S3 with C++ SDK
+
+- `_ZN3Aws2S35Model15GetObjectResult7GetBodyEv`
+- `_ZN3Aws2S35Model16GetObjectRequest10WithBucketEPKc`
+- `_ZN3Aws2S35Model16GetObjectRequest7WithKeyERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE`
+- `_ZN3Aws2S35Model16GetObjectRequestC1Ev`
+- `_ZN3Aws2S35Model16GetObjectRequestD2Ev`
+- `_ZN3Aws2S38S3ClientC1ERKNS_6Client19ClientConfigurationENS2_15AWSAuthV4Signer20PayloadSigningPolicyEbNS0_34US_EAST_1_REGIONAL_ENDPOINT_OPTIONE`
+- `_ZN3Aws2S38S3ClientD1Ev`
+- `_ZN3Aws5Utils7OutcomeINS_2S35Model15GetObjectResultENS2_7S3ErrorEE22GetResultWithOwnershipEv`
+- `_ZN3Aws5Utils7OutcomeINS_2S35Model15GetObjectResultENS2_7S3ErrorEED2Ev`
+- `_ZN3Aws6Client19ClientConfigurationC1Ev`
+- `_ZN3Aws6Client19ClientConfigurationD2Ev`
+- `_ZN9__gnu_cxx17__normal_iteratorIPNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt6vectorIS6_SaIS6_EEEppEv`
+- `_ZN9__gnu_cxxneIPNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt6vectorIS6_SaIS6_EEEEbRKNS_17__normal_iteratorIT_T0_EESG_`
+- `_ZNK3Aws2S38S3Client9GetObjectERKNS0_5Model16GetObjectRequestE`
+- `_ZNK3Aws5Utils7OutcomeINS_2S35Model15GetObjectResultENS2_7S3ErrorEE9IsSuccessEv`
+- `_ZNK9__gnu_cxx17__normal_iteratorIPNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt6vectorIS6_SaIS6_EEEdeEv`
+- `_ZNKSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE4findEPKcm`
+- `_ZNKSt9basic_iosIcSt11char_traitsIcEEcvbEv`
+- `_ZNSolsEPFRSoS_E`
+- `_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC1ERKS4_`
+- `_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC1Ev`
+- `_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEED1Ev`
+- `_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEED1Ev`
+- `_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEED1Ev`
+- `_ZSt7getlineIcSt11char_traitsIcESaIcEERSt13basic_istreamIT_T0_ES7_RNSt7__cxx1112basic_stringIS4_S5_T1_EE`
+- `_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc`
+- `_ZStlsIcSt11char_traitsIcESaIcEERSt13basic_ostreamIT_T0_ES7_RKNSt7__cxx1112basic_stringIS4_S5_T1_EE`
+- `_ZStlsIcSt11char_traitsIcESaIcEERSt13basic_ostreamIT_T0_ES7_RKNSt7__cxx1112basic_stringIS4_S5_T1_EE`
+
+## Demangle Names
+
+- `Aws::S3::Model::GetObjectResult::GetBody()`
+- `Aws::S3::Model::GetObjectRequest::WithBucket(char const*)`
+- `Aws::S3::Model::GetObjectRequest::WithKey(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)`
+- `Aws::S3::Model::GetObjectRequest::GetObjectRequest()`
+- `Aws::S3::Model::GetObjectRequest::~GetObjectRequest()`
+- `Aws::S3::S3Client::S3Client(Aws::Client::ClientConfiguration const&, Aws::Client::AWSAuthV4Signer::PayloadSigningPolicy, bool, Aws::S3::US_EAST_1_REGIONAL_ENDPOINT_OPTION)`
+- `Aws::S3::S3Client::~S3Client()`
+- `Aws::Utils::Outcome<Aws::S3::Model::GetObjectResult, Aws::S3::S3Error>::GetResultWithOwnership()`
+- `Aws::Utils::Outcome<Aws::S3::Model::GetObjectResult, Aws::S3::S3Error>::~Outcome()`
+- `Aws::Client::ClientConfiguration::ClientConfiguration()`
+- `Aws::Client::ClientConfiguration::~ClientConfiguration()`
+- `__gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > >::operator++()`
+- `bool __gnu_cxx::operator!=<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > >(__gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > > const&, __gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > > const&)`
+- `Aws::S3::S3Client::GetObject(Aws::S3::Model::GetObjectRequest const&) const`
+- `Aws::Utils::Outcome<Aws::S3::Model::GetObjectResult, Aws::S3::S3Error>::IsSuccess() const`
+- `__gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > >::operator*() const`
+- `std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find(char const*, unsigned long) const`
+- `std::basic_ios<char, std::char_traits<char> >::operator bool() const`
+- `std::basic_ostream<char, std::char_traits<char> >::operator<<(std::basic_ostream<char, std::char_traits<char> >& (*)(std::basic_ostream<char, std::char_traits<char> >&))`
+- `std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)`
+- `std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string()`
+- `std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()`
+- `std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()`
+- `std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()`
+- `std::basic_istream<char, std::char_traits<char> >& std::getline<char, std::char_traits<char>, std::allocator<char> >(std::basic_istream<char, std::char_traits<char> >&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)`
+- `std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)`
+- `std::basic_ostream<char, std::char_traits<char> >& std::operator<< <char, std::char_traits<char>, std::allocator<char> >(std::basic_ostream<char, std::char_traits<char> >&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)`
+- `std::basic_ostream<char, std::char_traits<char> >& std::operator<< <char, std::char_traits<char>, std::allocator<char> >(std::basic_ostream<char, std::char_traits<char> >&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)`
+
+## Call Instruction
+
+- `%call19 = invoke fastcc dereferenceable(952) %"class.Aws::S3::Model::GetObjectRequest"* @_ZN3Aws2S35Model16GetObjectRequest10WithBucketEPKc(%"class.Aws::S3::Model::GetObjectRequest"* %request, i8* %12)`
+- `%call21 = invoke fastcc dereferenceable(952) %"class.Aws::S3::Model::GetObjectRequest"* @_ZN3Aws2S35Model16GetObjectRequest7WithKeyERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE(%"class.Aws::S3::Model::GetObjectRequest"* %call19, %"class.std::__cxx11::basic_string"* dereferenceable(32) %file_name)`
+- `%call25 = call fastcc zeroext i1 @_ZNK3Aws5Utils7OutcomeINS_2S35Model15GetObjectResultENS2_7S3ErrorEE9IsSuccessEv(%"class.Aws::Utils::Outcome.101"* %outcome), !dbg !18243, !namer !18245`
+- `%call28 = call fastcc dereferenceable(848) %"class.Aws::S3::Model::GetObjectResult"* @_ZN3Aws5Utils7OutcomeINS_2S35Model15GetObjectResultENS2_7S3ErrorEE22GetResultWithOwnershipEv(%"class.Aws::Utils::Outcome.101"* %outcome), !dbg !18255, !namer !18256`
+- `%call30 = invoke fastcc dereferenceable(288) %"class.std::basic_iostream"* @_ZN3Aws2S35Model15GetObjectResult7GetBodyEv(%"class.Aws::S3::Model::GetObjectResult"* %call28)`
+- `%call34 = invoke dereferenceable(280) %"class.std::basic_istream"* @_ZSt7getlineIcSt11char_traitsIcESaIcEERSt13basic_istreamIT_T0_ES7_RNSt7__cxx1112basic_stringIS4_S5_T1_EE(%"class.std::basic_istream"* dereferenceable(280) %14, %"class.std::__cxx11::basic_string"* dereferenceable(32) %line31)`
+- `%call36 = invoke zeroext i1 @_ZNKSt9basic_iosIcSt11char_traitsIcEEcvbEv(%"class.std::basic_ios"* %18)`
+- `%call37 = call i64 @_ZNKSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE4findEPKcm(%"class.std::__cxx11::basic_string"* %line31, i8* %19, i64 0) #3, !dbg !18289, !namer !18290`
+- `%call41 = invoke dereferenceable(272) %"class.std::basic_ostream"* @_ZStlsIcSt11char_traitsIcESaIcEERSt13basic_ostreamIT_T0_ES7_RKNSt7__cxx1112basic_stringIS4_S5_T1_EE(%"class.std::basic_ostream"* dereferenceable(272) @_ZSt4cout, %"class.std::__cxx11::basic_string"* dereferenceable(32) %file_name)`
+- `%call43 = invoke dereferenceable(272) %"class.std::basic_ostream"* @_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc(%"class.std::basic_ostream"* dereferenceable(272) %call41, i8* %20)`
+- `%call45 = invoke dereferenceable(272) %"class.std::basic_ostream"* @_ZStlsIcSt11char_traitsIcESaIcEERSt13basic_ostreamIT_T0_ES7_RKNSt7__cxx1112basic_stringIS4_S5_T1_EE(%"class.std::basic_ostream"* dereferenceable(272) %call43, %"class.std::__cxx11::basic_string"* dereferenceable(32) %line31)`
+- `%call47 = invoke dereferenceable(272) %"class.std::basic_ostream"* @_ZNSolsEPFRSoS_E(%"class.std::basic_ostream"* %call45, %"class.std::basic_ostream"* (%"class.std::basic_ostream"*)* @_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_)`
+- `%call54 = call fastcc dereferenceable(8) %"struct.std::_Head_base.4"* @_ZN9__gnu_cxx17__normal_iteratorIPNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt6vectorIS6_SaIS6_EEEppEv(%"struct.std::_Head_base.4"* %__begin1) #3, !dbg !17660, !namer !18383`
+- `%call7 = call fastcc zeroext i1 @_ZN9__gnu_cxxneIPNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt6vectorIS6_SaIS6_EEEEbRKNS_17__normal_iteratorIT_T0_EESG_(%"struct.std::_Head_base.4"* dereferenceable(8) %__begin1, %"struct.std::_Head_base.4"* dereferenceable(8) %__end1) #3, !dbg !17660, !namer !17672`
+- `%call8 = call fastcc dereferenceable(32) %"class.std::__cxx11::basic_string"* @_ZNK9__gnu_cxx17__normal_iteratorIPNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt6vectorIS6_SaIS6_EEEdeEv(%"struct.std::_Head_base.4"* %__begin1) #3, !dbg !17678, !namer !17679`
+- `call fastcc void @_ZN3Aws2S35Model16GetObjectRequestD2Ev(%"class.Aws::S3::Model::GetObjectRequest"* %request) #3, !dbg !18374, !namer !18376`
+- `call fastcc void @_ZN3Aws5Utils7OutcomeINS_2S35Model15GetObjectResultENS2_7S3ErrorEED2Ev(%"class.Aws::Utils::Outcome.101"* %outcome) #3, !dbg !18374, !namer !18375`
+- `call fastcc void @_ZN3Aws6Client19ClientConfigurationD2Ev(%"struct.Aws::Client::ClientConfiguration"* %config) #3, !dbg !18374, !namer !18378`
+- `call void @_ZN3Aws2S38S3ClientD1Ev(%"class.Aws::S3::S3Client"* %s3_client) #3, !dbg !18374, !namer !18377`
+- `call void @_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC1Ev(%"class.std::__cxx11::basic_string"* %line31) #3, !dbg !18264, !namer !18266`
+- `call void @_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEED1Ev(%"class.std::__cxx11::basic_string"* %file_name) #3, !dbg !18379, !namer !18380`
+- `call void @_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEED1Ev(%"class.std::__cxx11::basic_string"* %line31) #3, !dbg !18365, !namer !18366`
+- `call void @_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEED1Ev(%"class.std::__cxx11::basic_string"* %line31) #3, !dbg !18365, !namer !18371`
+- `invoke void @_ZN3Aws2S35Model16GetObjectRequestC1Ev(%"class.Aws::S3::Model::GetObjectRequest"* %request)`
+- `invoke void @_ZN3Aws2S38S3ClientC1ERKNS_6Client19ClientConfigurationENS2_15AWSAuthV4Signer20PayloadSigningPolicyEbNS0_34US_EAST_1_REGIONAL_ENDPOINT_OPTIONE(%"class.Aws::S3::S3Client"* %s3_client, %"struct.Aws::Client::ClientConfiguration"* dereferenceable(672) %config, i32 2, i1 zeroext true, i32 0)`
+- `invoke void @_ZN3Aws6Client19ClientConfigurationC1Ev(%"struct.Aws::Client::ClientConfiguration"* %config)`
+- `invoke void @_ZNK3Aws2S38S3Client9GetObjectERKNS0_5Model16GetObjectRequestE(%"class.Aws::Utils::Outcome.101"* sret %outcome, %"class.Aws::S3::S3Client"* %s3_client, %"class.Aws::S3::Model::GetObjectRequest"* dereferenceable(952) %request)`
+- `invoke void @_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC1ERKS4_(%"class.std::__cxx11::basic_string"* %file_name, %"class.std::__cxx11::basic_string"* dereferenceable(32) %call8)`
