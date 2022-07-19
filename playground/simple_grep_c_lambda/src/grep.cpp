@@ -43,12 +43,12 @@ std::vector<std::string> find_files(char *bucket_name) {
 static auto all_matching_lines = std::vector<std::string>();
 static int outstanding_cnt = 0;
 static unsigned total_matching = 0;
+char *pattern;
 
 // create a mutex
 std::mutex lines_mutex;
 
-
-void handle(const Aws::Lambda::LambdaClient*  /*client*/, const Aws::Lambda::Model::InvokeRequest& req, Aws::Lambda::Model::InvokeOutcome outcome,
+void handle_lambda(const Aws::Lambda::LambdaClient*  /*client*/, const Aws::Lambda::Model::InvokeRequest&  /*req*/, Aws::Lambda::Model::InvokeOutcome outcome,
     const std::shared_ptr<const Aws::Client::AsyncCallerContext>& /*context*/) {
 
   if (outcome.IsSuccess())
@@ -83,29 +83,64 @@ void handle(const Aws::Lambda::LambdaClient*  /*client*/, const Aws::Lambda::Mod
   }
 }
 
+void handle_object(const Aws::S3::S3Client*, const Aws::S3::Model::GetObjectRequest& req, Aws::S3::Model::GetObjectOutcome outcome,
+    const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) {
+
+  if (outcome.IsSuccess()) {
+    auto file_name = req.GetKey();
+    auto &stream = outcome.GetResult().GetBody();
+
+    std::string line;
+    std::vector<std::string> lines;
+
+    // process line by line
+    while (std::getline(stream, line)) {
+      if (line.find(pattern) != std::string::npos) {
+        // push file_name ":" line to the lines
+        lines.push_back(file_name + ": " + line);
+      }
+    }
+
+    // guard by mutex
+    std::lock_guard<std::mutex> guard(lines_mutex);
+    all_matching_lines.insert(all_matching_lines.end(), lines.begin(), lines.end());
+    outstanding_cnt--;
+    total_matching += lines.size();
+  } else {
+    std::cout << "Error: " << outcome.GetError().GetMessage() << std::endl;
+  }
+}
 
 int main(int argc, char *argv[])
 {
     int i;
-    char *pattern;
     char *bucket;
     FILE *fp;
     char line[1024];
 
-    if (argc != 4) {
-        fprintf(stderr, "Usage: %s pattern directory LAMBDA_OR_NOT (0/1)\n", argv[0]);
+    if (argc != 5) {
+        fprintf(stderr, "Usage: %s pattern directory exp_type (LAMBDA[0]/local seq[1]/local async[2]) repeat_count\n", argv[0]);
         exit(EXIT_FAILURE);
     }
 
     pattern = argv[1];
     bucket = argv[2];
-    bool LAMBDA = atoi(argv[3]);
+    enum exp_type { LAMBDA = 0, LOCAL_SEQ, LOCAL_ASYNC };
+    auto type = (exp_type) atoi(argv[3]);
+    auto repeat_count = atoi(argv[4]);
 
 
     Aws::SDKOptions options;
     Aws::InitAPI(options);
 
     std::vector<std::string> file_names = find_files(bucket);
+
+    // duplicate the file_names repeat_count times
+    auto file_name_size = file_names.size();
+    for (int i = 0; i < repeat_count; i++) {
+      file_names.insert(file_names.end(), file_names.begin(), file_names.begin() + file_name_size);
+    }
+    
 
     /*
      * // print all file names
@@ -118,13 +153,12 @@ int main(int argc, char *argv[])
     Aws::Client::ClientConfiguration clientConfig;
     auto m_client = Aws::Lambda::LambdaClient(clientConfig);
 
-    // grep all files
-    // first degree of parallelism
-
-    if (LAMBDA)  {
-      outstanding_cnt = file_names.size() - 1;
+    // start recording time
+    auto start = std::chrono::high_resolution_clock::now();
+    if (type == LAMBDA) {
+      outstanding_cnt = file_names.size();
       for (auto file_name : file_names) {
-        std::cout << "Processing file: " << file_name << std::endl;
+        // std::cout << "Processing file: " << file_name << std::endl;
         // create a AWS lambda function to execute the following
         // 1. open the file through s3
         // 2. grep the pattern
@@ -133,25 +167,22 @@ int main(int argc, char *argv[])
 
         // process this asynchronously
 
-        // don't go into enwik8
-        if (file_name.find("enwik") == std::string::npos) {
-          // invoke grep-single aws lambda function
+        // invoke grep-single aws lambda function
 
-          Aws::Lambda::Model::InvokeRequest invokeRequest;
-          invokeRequest.SetFunctionName("grep-single");
-          invokeRequest.SetInvocationType(Aws::Lambda::Model::InvocationType::RequestResponse);
-          invokeRequest.SetLogType(Aws::Lambda::Model::LogType::Tail);
-          std::shared_ptr<Aws::IOStream> payload = Aws::MakeShared<Aws::StringStream>("FunctionTest");
-          Aws::Utils::Json::JsonValue jsonPayload;
-          jsonPayload.WithString("file_name", file_name);
-          jsonPayload.WithString("bucket", bucket);
-          jsonPayload.WithString("pattern", "hello");
-          *payload << jsonPayload.View().WriteReadable();
-          invokeRequest.SetBody(payload);
-          invokeRequest.SetContentType("application/json");
+        Aws::Lambda::Model::InvokeRequest invokeRequest;
+        invokeRequest.SetFunctionName("grep-single");
+        invokeRequest.SetInvocationType(Aws::Lambda::Model::InvocationType::RequestResponse);
+        invokeRequest.SetLogType(Aws::Lambda::Model::LogType::Tail);
+        std::shared_ptr<Aws::IOStream> payload = Aws::MakeShared<Aws::StringStream>("FunctionTest");
+        Aws::Utils::Json::JsonValue jsonPayload;
+        jsonPayload.WithString("file_name", file_name);
+        jsonPayload.WithString("bucket", bucket);
+        jsonPayload.WithString("pattern", pattern);
+        *payload << jsonPayload.View().WriteReadable();
+        invokeRequest.SetBody(payload);
+        invokeRequest.SetContentType("application/json");
 
-          m_client.InvokeAsync(invokeRequest, handle);
-        }
+        m_client.InvokeAsync(invokeRequest, handle_lambda);
       }
 
       // wait for all lambda functions to finish
@@ -159,47 +190,68 @@ int main(int argc, char *argv[])
         std::this_thread::sleep_for(std::chrono::milliseconds(20));
       }
     }
-    else {
+    else if (type == LOCAL_SEQ) {
       // grep all files locally
       Aws::Client::ClientConfiguration config;
-      // config.caFile = "/etc/pki/tls/certs/ca-bundle.crt"; 
       Aws::S3::S3Client s3_client(config);
 
       for (auto file_name : file_names) {
-        std::cout << "Processing file: " << file_name << std::endl;
-        // don't go into enwik8
-        if (file_name.find("enwik") == std::string::npos) {
+        // std::cout << "Processing file: " << file_name << std::endl;
 
-          Aws::S3::Model::GetObjectRequest req;
-          req.WithBucket(bucket).WithKey(file_name);
+        Aws::S3::Model::GetObjectRequest req;
+        req.WithBucket(bucket).WithKey(file_name);
 
-          auto outcome = s3_client.GetObject(req);
+        auto outcome = s3_client.GetObject(req);
 
-          // a list of lines
-          std::vector<std::string> lines;
-          if (outcome.IsSuccess()) {
-            auto &stream = outcome.GetResult().GetBody();
+        // a list of lines
+        std::vector<std::string> lines;
+        if (outcome.IsSuccess()) {
+          auto &stream = outcome.GetResult().GetBody();
 
-            // process line by line
-            std::string line;
-            // second degree of parallelism
-            while (std::getline(stream, line)) {
-              if (line.find(pattern) != std::string::npos) {
-                total_matching++;
-                // push file_name ":" line to the lines
-                all_matching_lines.push_back(file_name + ": " + line);
-              }
+          // process line by line
+          std::string line;
+          // second degree of parallelism
+          while (std::getline(stream, line)) {
+            if (line.find(pattern) != std::string::npos) {
+              total_matching++;
+              // push file_name ":" line to the lines
+              all_matching_lines.push_back(file_name + ": " + line);
             }
-          } else {
-            std::cout << "Error: " << outcome.GetError().GetMessage() << std::endl;
           }
+        } else {
+          std::cout << "Error: " << outcome.GetError().GetMessage() << std::endl;
         }
       }
     }
+    else if (type == LOCAL_ASYNC) {
+      outstanding_cnt = file_names.size();
+      // grep all files locally asynchronously
+      Aws::Client::ClientConfiguration config;
+      Aws::S3::S3Client s3_client(config);
 
-    for (auto line : all_matching_lines) {
-      std::cout << line << std::endl;
+      for (auto file_name : file_names) {
+        // std::cout << "Processing file: " << file_name << std::endl;
+
+        Aws::S3::Model::GetObjectRequest req;
+        req.WithBucket(bucket).WithKey(file_name);
+
+        s3_client.GetObjectAsync(req, handle_object);
+      }
+
+      // wait for all lambda functions to finish
+      while (outstanding_cnt > 0) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(20));
+      }
     }
+
+    // stop recording time
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> diff = end - start;
+    std::cout << "Time taken: " << diff.count() << " seconds" << std::endl;
+
+    // for (auto line : all_matching_lines) {
+    //   std::cout << line << std::endl;
+    // }
 
     std::cout << "Total matching lines: " << total_matching << std::endl;
 
