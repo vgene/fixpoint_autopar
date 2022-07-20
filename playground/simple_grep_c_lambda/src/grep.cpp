@@ -73,13 +73,16 @@ void handle_lambda(const Aws::Lambda::LambdaClient*  /*client*/, const Aws::Lamb
     int line_size = lines.GetLength();
 
     // guard by mutex
-    std::lock_guard<std::mutex> guard(lines_mutex);
-    for (int i = 0; i < line_size; i++) {
-      all_matching_lines.push_back(lines.GetItem(i).AsString());
-    }
+    {
+      std::lock_guard<std::mutex> guard(lines_mutex);
+      for (int i = 0; i < line_size; i++) {
+        all_matching_lines.push_back(lines.GetItem(i).AsString());
+      }
 
-    outstanding_cnt--;
-    total_matching += lines_count;
+      total_matching += lines_count;
+      outstanding_cnt--;
+      // std::cout << "Total matching: " << total_matching << std::endl;
+    }
   }
 }
 
@@ -137,10 +140,12 @@ int main(int argc, char *argv[])
 
     // duplicate the file_names repeat_count times
     auto file_name_size = file_names.size();
-    for (int i = 0; i < repeat_count; i++) {
-      file_names.insert(file_names.end(), file_names.begin(), file_names.begin() + file_name_size);
+    file_names.resize(file_name_size * repeat_count);
+    for (int i = 1; i < repeat_count; i++) {
+      std::copy_n(file_names.begin(), file_name_size, file_names.begin() + i * file_name_size);
     }
-    
+
+    std::cout << "Total number of files:" << file_names.size() << " files" << std::endl;
 
     /*
      * // print all file names
